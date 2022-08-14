@@ -31,11 +31,9 @@
 
             document.addEventListener("DOMContentLoaded", () => {
                 let getEl = document.getElementById.bind(document);
-                console.log(getEl("decrypt"));
                 getEl("decrypt").addEventListener("click", () => {
                     getEl("output").value = window.panos_decrypt(getEl("key").value, getEl("input").value);
                 });
-                console.log(getEl("encrypt"));
                 getEl("encrypt").addEventListener("click", () => {
                     getEl("output").value = window.panos_encrypt(getEl("key").value, getEl("input").value);
                 });
