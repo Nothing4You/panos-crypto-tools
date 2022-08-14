@@ -44,6 +44,12 @@ jobs:
           override: true
           target: wasm32-unknown-unknown
 
+      - name: Install wasm-bindgen-cli
+        uses: actions-rs/cargo@v1
+        with:
+          # this version needs to be in sync with wasm-bindgen in Cargo.toml
+          command: install wasm-bindgen-cli --vers "0.2.82"
+
       - name: Run cargo test
         uses: actions-rs/cargo@v1
         with:

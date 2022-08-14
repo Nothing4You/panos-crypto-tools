@@ -9,7 +9,8 @@ repository = "https://github.com/Nothing4You/panos-crypto-tools"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-wasm-bindgen = "0.2.81"
+# this version needs to be in sync with wasm-bindgen-cli in .github/workflows/test.yml
+wasm-bindgen = "0.2.82"
 
 base64 = "0.13.0"
 
