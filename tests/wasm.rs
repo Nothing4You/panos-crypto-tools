@@ -22,6 +22,15 @@ const CIPHERTEXT_CUSTOM_KEY: [&str; 4] = [
     "-AQ==JDMiu5l+hyLHa3FR3/rag8K1G9A=kFNF6riNzVd2V4N/JyXCnA==",
 ];
 
+const BAD_CIPHERTEXTS: [&str; 6] = [
+    "",
+    "foo",
+    "-AQ==",
+    "-AQ==foo",
+    "-AQ==Kq5sNclPz7QV2+lfQIuc6R7oRu0=",
+    "-AQ==Kq5sNclPz7QV2+lfQIuc6R7oRu0=foo",
+];
+
 fn main() {
     use wasm_bindgen_test::*;
 
@@ -52,6 +61,14 @@ fn main() {
                 panos_crypto_tools::panos_decrypt(CUSTOM_KEY, CIPHERTEXT_CUSTOM_KEY[i]),
                 PLAINTEXT_VALUES[i],
             );
+        }
+    }
+
+    #[wasm_bindgen_test]
+    fn test_bad_decryption_inputs() {
+        // we just don't want to panic
+        for bad_ciphertext in BAD_CIPHERTEXTS {
+            panos_crypto_tools::panos_decrypt("", bad_ciphertext);
         }
     }
 }

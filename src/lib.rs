@@ -61,10 +61,19 @@ pub fn panos_decrypt(key: &str, input: &str) -> String {
     }
     let ct = ct.unwrap();
 
-    let iv = [0u8; 16];
-    let derived_key = panos_derive_key(master_key.unwrap());
-    let cipher = Cipher::new_256(&derived_key);
-    let cleartext = cipher.cbc_decrypt(&iv, ct.as_slice());
+    let cleartext = match ct.len() {
+        0 => Vec::new(),
+        _ => {
+            if ct.len() % 16 != 0 {
+                return "Invalid ciphertext length".to_string();
+            }
+
+            let iv = [0u8; 16];
+            let derived_key = panos_derive_key(master_key.unwrap());
+            let cipher = Cipher::new_256(&derived_key);
+            cipher.cbc_decrypt(&iv, ct.as_slice())
+        }
+    };
 
     let cleartext_hash = sha1_digest(&cleartext);
 
