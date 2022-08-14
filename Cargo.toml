@@ -1,0 +1,28 @@
+[package]
+name = "panos-crypto-tools"
+version = "0.1.0"
+authors = ["Richard Schwab <githubcomnothing-epbaa2cksn@central-intelligence.agency>"]
+edition = "2021"
+repository = "https://github.com/Nothing4You/panos-crypto-tools"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2.81"
+
+base64 = "0.13.0"
+
+digest = "0.10.3"
+md-5 = "0.10.1"
+sha1 = "0.10.1"
+
+libaes = "0.6.2"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.32"
+
+[profile.release]
+# Tell `rustc` to optimize for small code size.
+opt-level = "s"
+lto = true

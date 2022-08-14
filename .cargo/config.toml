@@ -1,0 +1,6 @@
+[build]
+target = "wasm32-unknown-unknown"
+
+# https://rustwasm.github.io/docs/wasm-bindgen/wasm-bindgen-test/usage.html#appendix-using-wasm-bindgen-test-without-wasm-pack
+[target.wasm32-unknown-unknown]
+runner = 'wasm-bindgen-test-runner'

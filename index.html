@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+        <title>PAN-OS Crypto Tools</title>
+        <style type="text/css">
+            textarea {
+                min-width: 400px;
+                min-height: 200px;
+                width: 1000px;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            "use strict";
+
+            import init, { panos_decrypt, panos_encrypt } from './pkg/panos_crypto_tools.js';
+
+            async function run() {
+                await init();
+
+                window.panos_decrypt = panos_decrypt;
+                window.panos_encrypt = panos_encrypt;
+            }
+
+            run();
+        </script>
+        <script>
+            "use strict";
+
+            document.addEventListener("DOMContentLoaded", () => {
+                let getEl = document.getElementById.bind(document);
+                console.log(getEl("decrypt"));
+                getEl("decrypt").addEventListener("click", () => {
+                    getEl("output").value = window.panos_decrypt(getEl("key").value, getEl("input").value);
+                });
+                console.log(getEl("encrypt"));
+                getEl("encrypt").addEventListener("click", () => {
+                    getEl("output").value = window.panos_encrypt(getEl("key").value, getEl("input").value);
+                });
+            });
+        </script>
+        <label for="key">Master Key</label> <input id="key" size="16" maxlength="16" placeholder="p1a2l3o4a5l6t7o8"/> (exactly 16 characters)<br/>
+        <label for="input">Input</label><br/>
+        <textarea id="input"></textarea><br/>
+        <button id="decrypt">Decrypt</button> <button id="encrypt">Encrypt</button><br/>
+        <label for="output">Output</label><br/>
+        <textarea id="output"></textarea>
+    </body>
+</html>
