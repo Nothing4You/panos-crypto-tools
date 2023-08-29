@@ -49,7 +49,7 @@ jobs:
         with:
           # this version needs to be in sync with wasm-bindgen in Cargo.toml
           command: install
-          args: wasm-bindgen-cli --vers "0.2.82"
+          args: wasm-bindgen-cli --vers "0.2.87"
 
       - name: Run cargo test
         uses: actions-rs/cargo@v1
