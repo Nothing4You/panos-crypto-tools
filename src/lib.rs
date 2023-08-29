@@ -97,7 +97,7 @@ pub fn panos_encrypt(key: &str, input: &str) -> String {
     }
 
     // version 1
-    let version = base64::encode(&[1u8]);
+    let version = base64::encode([1u8]);
 
     // integrity hash to verify decryption result
     let hash = base64::encode(sha1_digest(&input));
